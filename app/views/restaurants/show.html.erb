@@ -1,0 +1,53 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @restaurant.name %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @restaurant.address %>
+</p>
+
+<p>
+  <strong>Phone number:</strong>
+  <%= @restaurant.phone_number %>
+</p>
+
+<p>
+  <strong>Category:</strong>
+  <%= @restaurant.category %>
+</p>
+
+<p>
+  <strong>Reviews:</strong>
+  <ul>
+
+  <% @restaurant.reviews.each do |review| %>
+    <li>Content: <%= review.content %> / Rating: <%= review.rating %></li>
+  <% end %>
+
+  </ul>
+</p>
+
+<p>
+  <strong>New Review:</strong>
+  <%= simple_form_for [@restaurant, @review] do |f| %>
+    <%= f.error_notification %>
+    <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+    <div class="form-inputs">
+      <%= f.input :content %>
+      <%= f.input :rating %>
+    </div>
+
+    <div class="form-actions">
+      <%= f.button :submit %>
+    </div>
+  <% end %>
+
+</p>
+
+
+<%= link_to 'Back', restaurants_path %>
